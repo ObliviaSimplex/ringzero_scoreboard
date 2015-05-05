@@ -1,3 +1,6 @@
+# Generate an HTML page for the scoreboard by querying
+# user profiles.
+
 import requests
 import re
 import fileinput
@@ -14,6 +17,7 @@ def getscore(uid):
 def main():
     print """<html>
   <body>
+    <h3>Scoreboard</h3>
     <table>
       <tr><th>User</th><th>Points</th></tr>
 """
