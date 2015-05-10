@@ -23,8 +23,10 @@ def main():
 """
     for line in fileinput.input("userids.txt"):
         user = line.strip('\n').split(',')
+	anchor = "<a href=\"http://ringzer0team.com/profile/" + user[1] \
+		+ "\">" + user[0] + "</a>"
         if user[1] != '':
-            print "<tr><td>" + user[0] + '</td><td>' + getscore(user[1]) + '</td></tr>'
+            print "<tr><td>" + anchor + '</td><td>' + getscore(user[1]) + '</td></tr>'
         else:
             print "<tr><td>" + user[0] + '</td><td>unavailable</td></tr>'
     print """</table></body></html>"""
