@@ -25,10 +25,11 @@ def get_challenge_dict(uid):
         # '\<a href=\"\/challenges\/.*'
         m = re.match(r'.*challenges.*', line)
         if m is not None:
-            
+            startlink = m.group(0).find("<")
+            link = m.group(0)[startlink:startlink+9]+"http://ringzer0team.com"+m.group(0)[startlink+9:]
             points = ("".join([c for c in splitdoc[l+3] if c in "0123456789"]))
             
-            challenge_points[m.group(0)]=points
+            challenge_points[link]=points
     return challenge_points
     
         
