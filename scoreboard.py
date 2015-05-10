@@ -60,7 +60,7 @@ def main():
     print "</table>"
     print "<h3>ALL CHALLENGES COMPLETED</h3>"
     print "<table>"
-    print "<tr><td></td><td></td><td></td></tr>"
+    print "<tr><th>challenge</th><th>points</th><th>pwned by</th></tr>"
     grand_total=0
     for c in challenge_points:
         try:
@@ -72,7 +72,7 @@ def main():
         except:
             pass
         
-    print "<tr><td>GRAND TOTAL</td><td>"+str(grand_total)+"</td></tr>"
+    print "<tr><td><b>GRAND TOTAL</b></td><td><b>"+str(grand_total)+"</b></td></tr>"
     
     print """</table></body></html>"""
 
