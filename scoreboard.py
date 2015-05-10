@@ -40,24 +40,35 @@ def main():
       <tr><th>User</th><th>Points</th></tr>
     """
     challenge_points = {}
+    challenge_pwners = {}
     for line in fileinput.input("userids.txt"):
         user = line.strip('\n').split(',')
-        cp = get_challenge_dict(user[1])
-        if len(cp) > 0:
-            challenge_points.update(cp)
+        cpoints = get_challenge_dict(user[1])
+        for c in cpoints:
+            if c in challenge_pwners:
+                challenge_pwners[c].append(user[0])
+            else:
+                challenge_pwners[c] = [user[0]]
+        if len(cpoints) > 0:
+            challenge_points.update(cpoints)
 	anchor = "<a href=\"http://ringzer0team.com/profile/" + user[1] \
 		+ "\">" + user[0] + "</a>"
         if user[1] != '':
             print "<tr><td>" + anchor + '</td><td>' + getscore(user[1]) + '</td></tr>'
         else:
             print "<tr><td>" + user[0] + '</td><td>unavailable</td></tr>'
-    
-    print "<tr><td>ALL CHALLENGES COMPLETED</td><td></td></tr>"
+    print "</table>"
+    print "<h3>ALL CHALLENGES COMPLETED</h3>"
+    print "<table>"
+    print "<tr><td></td><td></td><td></td></tr>"
     grand_total=0
     for c in challenge_points:
         try:
             grand_total += int(challenge_points[c])
-            print "<tr><td>"+c+"</td><td>"+challenge_points[c]+"</td></tr>"
+            pwnedby = ""
+            for name in challenge_pwners[c]:
+                pwnedby += name+" "
+            print "<tr><td>"+c+"</td><td>"+challenge_points[c]+"</td><td>"+pwnedby+"</td></tr>"
         except:
             pass
         
